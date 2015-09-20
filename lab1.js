@@ -2,29 +2,29 @@
 
 /* LAB 1: A Trip to Woodland Park Zoo
 
- Welcome to Lab 1 =)
+Welcome to Lab 1 =)
 
- Be sure to read all the comments!
+Be sure to read all the comments!
 
- All of the instructions are inline with the assignment below. Look for the
- word TODO in comments.  Each TODO will have a description of what is
- required.
+All of the instructions are inline with the assignment below. Look for the
+word TODO in comments.  Each TODO will have a description of what is
+required.
 
- To run this file, type the following (in the terminal):
+To run this file, type the following (in the terminal):
 
-    node lab1.js
+  node lab1.js
 
- and then press enter/return.
+and then press enter/return.
 
- Instructions for turning this lab in are in the assignment description in
- Canvas.
+Instructions for turning this lab in are in the assignment description in
+Canvas.
 
- I'm happy to answer any questions on Slack.
+I'm happy to answer any questions on Slack.
 
 */
 
 /* ----------------- Helper ------------------------------------------------
- We've implemented a function that will help you sanity-check your code.
+We've implemented a function that will help you sanity-check your code.
 */
 
 function assert(expression, failureMessage) {
@@ -34,55 +34,80 @@ function assert(expression, failureMessage) {
 }
 
 /*
- An assertion is something we expect to be true about the state of the
- program at the point where the assertion is made.
+An assertion is something we expect to be true about the state of the
+program at the point where the assertion is made.
 
- Remember, state is all the variables that we've declared and their current
- values.
+Remember, state is all the variables that we've declared and their current
+values.
 
- Here are some examples for how to use the assert method:
+Here are some examples for how to use the assert method:
 */
 
+/*
+Commenting out these assertions in order to pass jscs test
 assert(1 === 1, '1 equals 1 - this assert will pass.');
 assert(1 === 2, 'this is an example of a failing assertion. 1 does not equal 2.');
-
+*/
 /* ===========================================================================
 ------------------Assertions (8 points total)---------------------------------
 ==============================================================================
- TODO: Invoke assert twice (4 points each).
- (In other words, create two assertions like the ones
- above.)
- Use any boolean expressions that you like, but preferably
- zoo-themed.  Make one pass and one fail. In the failure message, describe why
- it failed.
+TODO: Invoke assert twice (4 points each).
+(In other words, create two assertions like the ones
+above.)
+Use any boolean expressions that you like, but preferably
+zoo-themed.  Make one pass and one fail. In the failure message, describe why
+it failed.
 */
 
 //your code goes here
+assert('Black ' + 'Rhino' === 'Black Rhino', 'The two strings when added together concatenate');
+assert('Black' + 'Rhino' === 'Black Rhino', 'The space is missing from the first \'Rhino\' string when they concatenate, so the strings do not match.');
 
 /* ========================================================================
 ----------------- Meerkats (20 points total)-------------------------------
 ===========================================================================
- Meerkats make a sort of chirping noise (according to my 30 seconds of
- research).  We're going to translate two sentences into meerkat speech.
+Meerkats make a sort of chirping noise (according to my 30 seconds of
+research).  We're going to translate two sentences into meerkat speech.
 */
 
 var sentence1 = 'More food please.';
 var sentence2 = 'Come over here so you can scratch my belly.';
 /*
- Your goal is to replace the words in the above sentences with 'chirp' The
- assertions at the end of this section should pass when you're done.
- HINT: the 'split' method on String will be useful.
+Your goal is to replace the words in the above sentences with 'chirp' The
+assertions at the end of this section should pass when you're done.
+HINT: the 'split' method on Strijsng will be useful.
 */
 
 // TODO: part #1: use a for loop to replace the words in sentence 1 with
 // 'chirp' (10 points)
 
 // your code goes here
+function meerkatTranslate(sentence, loopType) {
+  var sentenceArray = sentence.split(' ');
+//A conditional to determine the type of loop to be used. If loopType is left blank in the function, it defaults to a for loop. Both the for loop and the while loop iterate through the words in the sentenceArray created above and convert each element in the array to the word 'chirp'
+  if (loopType === 'for' || loopType === undefined) {
+    for (var i = 0; i < sentenceArray.length; i++) {
+      sentenceArray[i] = 'chirp';
+    }
+  } else if (loopType === 'while') {
+    var counter = 0;
+    while (counter < sentenceArray.length) {
+      sentenceArray[counter] = 'chirp';
+      counter++;
+    }
+  }
+  sentence = sentenceArray.join(' ');
+  sentence += '.';
+  return sentence;
+}
+
+sentence1 = meerkatTranslate(sentence1, 'for');
 
 // TODO: part #2: use a while or do-while loop to replace the words in sentence 2
 // with 'chirp' (10 points)
 
 // your code goes here
+sentence2 = meerkatTranslate(sentence2, 'while');
 
 // Leave these assertions as-is! If they pass, your code works.
 assert(sentence1 === 'chirp chirp chirp.', 'sentence 1 should have 3 chirps');
@@ -92,10 +117,10 @@ assert(sentence2 === 'chirp chirp chirp chirp chirp chirp chirp chirp chirp.',
 /* ========================================================================
 ----------------- Favorite Animals (12 points)-----------------------------
 ===========================================================================
- The zoo is closing in 20 minutes. You still haven't seen your four favorite
- animals. You only have time for one. Use Math.random() to pick which animal
- to see next.
- Hint: read the Math.random description on MDN.
+The zoo is closing in 20 minutes. You still haven't seen your four favorite
+animals. You only have time for one. Use Math.random() to pick which animal
+to see next.
+Hint: read the Math.random description on MDN.
 */
 
 var favoriteAnimals = ['elephant', 'penguin', 'eagle', 'camel'];
@@ -105,19 +130,25 @@ var nextAnimal;
 // Assign one of your favorite animals to nextAnimal using Math.random() to pick
 
 // your code goes here
+//Created a function to find randomly select an element in an array. To be used below.
+function getRandomArrayElement(myArray) {
+  var randomNumber = Math.floor(Math.random() * myArray.length);
+  return myArray[randomNumber];
+}
+nextAnimal = getRandomArrayElement(favoriteAnimals);
 
 assert(nextAnimal, 'assign something to nextAnimal');
 
 /* ===================================================================
 ----------------- Hungry Lion (20 points) ----------------------------
 ======================================================================
- As long as the lion is well-fed, he doesn't take too much heed of the
- humans that pass through. Unfortunately, the new caretaker is a little
- absent minded.
+As long as the lion is well-fed, he doesn't take too much heed of the
+humans that pass through. Unfortunately, the new caretaker is a little
+absent minded.
 
- The lion needs 4 meals per day on average to stay happy. You're going to
- figure out how many days it took before the lion decided to supplement his
- diet with the caretaker.
+The lion needs 4 meals per day on average to stay happy. You're going to
+figure out how many days it took before the lion decided to supplement his
+diet with the caretaker.
 */
 
 // number of times the new caretaker fed the lion. one array entry per day
@@ -125,15 +156,36 @@ var mealsPerDay = [5, 4, 3, 6, 2, 4, 3, 4, 5, 1];
 var tooHungryDay;
 
 /*
- TODO: 20 points
- Cycle through the days in mealsPerDay. At each day, print out the average
- number of meals/day the lion got since the new caretaker started.
- tooHungryDay should receive the number of days before the lion started
- pondering protein supplements (the first day the average dips below 4
- meals)
+TODO: 20 points
+Cycle through the days in mealsPerDay. At each day, print out the average
+number of meals/day the lion got since the new caretaker started.
+tooHungryDay should receive the number of days before the lion started
+pondering protein supplements (the first day the average dips below 4
+meals)
 */
 
 // your code goes here
+
+for (var i = 0; i < mealsPerDay.length; i++) {
+  if (i === 0) {
+//Initialize the totalMeals variable the first time the for loop runs.
+    var totalMeals = 0;
+  }
+//Each time the loop iterates an element from the meals per day array is added to totalMeals
+  totalMeals += mealsPerDay[i];
+  var averageMeals = totalMeals / (i + 1);
+  var dailyLog = '';
+//The if else conditional will change the string printed to the log once the average meals drops below 4. The else conditional will only execute once due to the break statement.
+  if (averageMeals >= 4) {
+    dailyLog = 'By the end of Day ' + (i + 1) + ': The lion has eaten an average of ' + averageMeals + ' meals.';
+  } else {
+    dailyLog = 'By the end of Day ' + (i + 1) +  ': The lion has eaten an average of ' + averageMeals + ' meals. The lion got too hungry and decided to eat the caretaker.';
+    console.log(dailyLog);
+    tooHungryDay = (i + 1);
+    break;
+  }
+  console.log(dailyLog);
+}
 
 assert(tooHungryDay, 'remember to assign the answer to tooHungryDay');
 assert(tooHungryDay < 10, 'the lion is too hungry before the end of the array');
@@ -141,17 +193,17 @@ assert(tooHungryDay < 10, 'the lion is too hungry before the end of the array');
 /* ==================================================================
 ----------------- Code Style (10 points) ----------------------------
 =====================================================================
- TODO: 10 points (5 points each for passing jshint and jscs)
- Now, we're going to use two tools: jshint and jscs, to check our code for
- best-practices and style consistency.
+TODO: 10 points (5 points each for passing jshint and jscs)
+Now, we're going to use two tools: jshint and jscs, to check our code for
+best-practices and style consistency.
 
- If you haven't already, run this command in the terminal (inside of this
- directory): npm install
+If you haven't already, run this command in the terminal (inside of this
+directory): npm install
 
- Now, type
-  grunt
-   and it will run both jshint and jscs on your code.
+Now, type
+grunt
+ and it will run both jshint and jscs on your code.
 
- Error and warning descriptions will be printed in the terminal.
- To get full points, correct all of the errors/warnings.
+Error and warning descriptions will be printed in the terminal.
+To get full points, correct all of the errors/warnings.
 */
